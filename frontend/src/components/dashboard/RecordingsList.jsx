@@ -72,14 +72,6 @@ export default function RecordingsList({ participantId }) {
 
   const formatDuration = (s) => `${Math.floor(s / 60)}:${Math.floor(s % 60).toString().padStart(2, '0')}`;
 
-  // Simulate loading for 3 seconds
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 60 * 60 * 1000); // 3 seconds
-    return () => clearTimeout(timer);
-  }, []);
-
   if (loading){
     return (
       <div className="w-screen h-screen flex justify-center items-start p-10">
