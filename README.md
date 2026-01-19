@@ -1,119 +1,160 @@
-# 🎙️ FinalCast
+<div align="center">
 
-> 🎥 **Not Just Record — Record. Render. Release.**
+  <h1>🎙️ FinalCast</h1>
+  
+  <h3>Record. Render. Release.</h3>
+  <p><i>The open-source, browser-based broadcasting studio that handles the heavy lifting for you.</i></p>
 
-FinalCast is an open-source, full-stack podcasting and video conversation platform built with the **MERN stack**, **WebRTC**, and **FFmpeg** — designed to provide creators with a **fully rendered video** after every session, without needing to manually edit timeline chunks.
+  <p>
+    <a href="#-tech-stack">Tech Stack</a> •
+    <a href="#-core-features">Features</a> •
+    <a href="#-getting-started">Getting Started</a> •
+    <a href="#-architecture">Architecture</a>
+  </p>
+  
+  ![License](https://img.shields.io/badge/license-MIT-blue.svg)
+  ![Status](https://img.shields.io/badge/status-active-success.svg)
+  ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
+
+</div>
 
 ---
 
 ## 🚀 Why FinalCast?
 
-While tools like Riverside.fm are powerful, they require creators or editors to manually stitch together video chunks after every session.
+Traditional streaming tools often leave you with a mess of raw footage. **FinalCast** is different. We are building a platform that doesn't just record; it **produces**.
 
-🧠 FinalCast aims to **solve that pain** by:
-- Recording video and audio locally
-- Uploading via **S3 multipart**
-- Dynamically adjusting layout as participants join/leave
-- Rendering a clean, editor-ready video at the end using **FFmpeg**
+By leveraging **WebRTC** for real-time interaction and **FFmpeg** for server-side compositing, FinalCast delivers a fully rendered, editor-ready video immediately after your session ends. No more manual stitching. No more syncing headaches.
 
-> Aimed at creators, teams, and developers who want full control without costly software dependencies.
+> **Our Mission:** To democratize professional-grade live broadcasting by combining the flexibility of the web with the power of server-side rendering.
 
 ---
 
-## 📦 Tech Stack
+## 🛠️ Tech Stack
 
-| Layer        | Tech Used                         |
-|-------------|------------------------------------|
-| Frontend    | React + Vite + TailwindCSS         |
-| Backend     | Node.js + Express + Socket.IO      |
-| Media       | WebRTC + MediaRecorder + FFmpeg    |
-| Storage     | S3-Compatible Object Storage (MinIO/S3) |
-| Uploads     | Multipart Upload + IndexedDB Buffer |
-| Auth (Optional) | JWT / Magic Link (future)     |
+### Trusted by Engineers, Built for Creators.
+
+#### **Frontend (The Stage)**
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Redux Toolkit](https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=redux&logoColor=white)
+![Radix UI](https://img.shields.io/badge/Radix%20UI-161618?style=for-the-badge&logo=radix-ui&logoColor=white)
+
+*   **State & Async:** `TanStack Query`, `Redux Toolkit`
+*   **Real-time:** `Socket.io-client` for signaling
+*   **Styling:** `Tailwind CSS` + `Radix UI` Primitives
+*   **Animations:** `Framer Motion`
+
+#### **Backend (The Studio)**
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+![Socket.io](https://img.shields.io/badge/Socket.io-010101?style=for-the-badge&logo=socket.io&logoColor=white)
+![FFmpeg](https://img.shields.io/badge/FFmpeg-007808?style=for-the-badge&logo=ffmpeg&logoColor=white)
+
+*   **Core:** `Node.js` + `Express`
+*   **Media Processing:** `FFmpeg` (Server-side rendering & transcoding)
+*   **Storage:** `AWS S3` (via Multer S3) & `Cloudinary`
+*   **Auth:** `Passport.js` (Google OAuth) + `JWT`
+*   **AI Integration:** `@google/generative-ai`
 
 ---
 
 ## 🎯 Core Features
 
-- 🔴 Real-time room-based video calls (WebRTC)
-- 📡 Peer-to-peer media exchange with fallback signaling
-- 🎙️ Multi-participant auto layout (dynamic tiling)
-- 📤 S3 Multipart Uploads (with offline buffering)
-- 🧠 Progressive Recovery (uploads resume if browser crashes)
-- 🎞️ Final Render: Clean video with FFmpeg at session end
-- 🔐 Zero-Knowledge Recording (on-device encryption)
-- 🌍 Multi-language audio tracks + translated subtitles
-- 🪄 Visual Timeline Editor (drag-and-drop layout)
+| Feature | Description |
+| :--- | :--- |
+| **🔴 Real-time Studio** | Low-latency video calls powered by **WebRTC** and mesh networking. |
+| **🎞️ Cloud Rendering** | Automatic, server-side composition of video tracks using **FFmpeg**. |
+| **🤖 AI-Enhanced** | Integrated with **Google Gemini** for smart features. |
+| **📁 Smart Storage** | Multipart uploads to **AWS S3** with robust failure recovery. |
+| **🎼 Dynamic Layouts** | Auto-adjusting video grids that adapt as participants join. |
+| **🔐 Secure Access** | `OAuth2` Google login and `JWT` session management. |
 
 ---
 
-## 📁 Folder Structure
+## 📂 Architecture & Folder Structure
 
-<pre><code>```FinalCast/
-├── frontend/               # React Frontend
-│   ├── src/
-│   │   ├── hooks/          # useWebRTC, useMediaRecorder
-│   │   ├── components/     # Room, VideoTile, Toolbar
-│   │   ├── pages/          # JoinPage, RoomPage
-│   │   └── App.jsx
-├── backend/                # Express + Socket.IO backend
-│   ├── index.js
-│   ├── routes/
-│   └── controllers/
-├── scripts/                # FFmpeg rendering helpers
-├── media/                  # Transcoded files (temp)
-├── public/
-└── README.md
-``` </code></pre>
-
-
----
-
-## ⚙️ Installation
+We maintain a clean separation of concerns between the client and server.
 
 ```bash
-# Clone the repo
-git clone https://github.com/anothercoder-nik/FinalCast.git
-cd Finalcast
+FinalCast/
+├── frontend/               # The Client Application
+│   ├── src/
+│   │   ├── api/            # API integration points
+│   │   ├── components/     # Reusable UI components
+│   │   ├── context/        # React Context providers
+│   │   ├── hooks/          # Custom Hooks (useWebRTC, etc.)
+│   │   ├── pages/          # Application Routes/Pages
+│   │   ├── store/          # Redux State Management
+│   │   └── utils/          # Helper functions
+│   └── package.json
+│
+├── backend/                # The Server Application
+│   ├── DAO/                # Data Access Objects (DB Layer)
+│   ├── config/             # Environment & App Configuration
+│   ├── controllers/        # Request Handlers
+│   ├── models/             # Mongoose Schemas
+│   ├── routes/             # API Route Definitions
+│   ├── services/           # Business Logic (Recording, Transcoding)
+│   ├── socket/             # Real-time Event Handlers
+│   ├── recording/          # Media Processing Utilities
+│   └── app.js              # Server Entry Point
+│
+└── README.md
+```
 
-# Install backend
-cd backend
-npm install
+---
 
-# Install frontend
-cd ../frontend
-npm install
+## ⚡ Getting Started
 
-🧪 Run Locally
-Start backend:
-cd backend
-node index.js
+Ready to run your own studio? Follow these steps.
 
-Start Frontend:
-cd ./frontend/
-npm run dev
+### Prerequisites
+*   Node.js (v18+)
+*   MongoDB (Local or Atlas)
+*   FFmpeg installed on your system path.
 
+### Installation
 
-Visit: http://localhost:5173
-Open in 2 browser tabs → enter same room ID → boom, video call begins.
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/anothercoder-nik/FinalCast.git
+    cd FinalCast
+    ```
 
+2.  **Setup Backend**
+    ```bash
+    cd backend
+    npm install
+    # Create .env file based on .env.example
+    npm run dev
+    ```
 
-# 🎞️ Render Pipeline
-Record each track locally using MediaRecorder
+3.  **Setup Frontend**
+    ```bash
+    cd ../frontend
+    npm install
+    npm run dev
+    ```
 
-Upload in chunks via S3 multipart API
+4.  **Go Live!**
+    Visit `http://localhost:5173` and start creating.
 
-After session:
+---
 
-FFmpeg merges all audio+video tracks
+## 🤝 Contributing
 
-Layout adjusts based on who joined when
+We love contributions! FinalCast is built by the community, for the community.
 
-Output: final.mp4 with intro/outro if needed
+1.  Check out our [Open Issues](./OPEN_ISSUES.md) to find a task.
+2.  Fork the repo and create a branch: `git checkout -b feature/amazing-feature`.
+3.  Commit your changes and push.
+4.  Open a Pull Request! 🚀
 
+---
 
-
-# To contribute:
-- Fork this repo
-- Create a new branch
-- Submit a PR
+<p align="center">
+  Built with ❤️ by the FinalCast Team
+</p>
