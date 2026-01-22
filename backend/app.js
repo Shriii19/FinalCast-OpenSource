@@ -1,3 +1,6 @@
+
+import logger from "./utils/logger.js";
+
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -138,6 +141,7 @@ app.get('/api/health', (req, res) => {
 const PORT = process.env.PORT || 3000;
 
 server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log(`Socket.IO ready`);
+  logger.info(`Server running on port ${PORT}`);
+  logger.info("Socket.IO ready");
 });
+
